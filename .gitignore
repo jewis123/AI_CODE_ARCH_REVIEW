@@ -1,0 +1,4 @@
+*.pyc
+.global_ast_cache/
+.vscode/
+chroma/

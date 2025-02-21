@@ -1,0 +1,170 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 800px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+             #config {
+                 float: left;
+                 width: 400px;
+                 height: 600px;
+             }
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+            <div id="config"></div>
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#4ECDC4", "id": "GameFrameworkEntry", "label": "GameFrameworkEntry", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Base\\GameFrameworkEntry.cs"}, {"color": "#4ECDC4", "id": "Utility.Marshal", "label": "Utility.Marshal", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\FileSystem\\FileSystem.cs"}, {"color": "#4ECDC4", "id": "Utility.Text", "label": "Utility.Text", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Base\\EventPool\\EventPool.cs"}, {"color": "#4ECDC4", "id": "Type", "label": "Type", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Utility\\Utility.Assembly.cs"}, {"color": "#4ECDC4", "id": "GameFrameworkSerializer", "label": "GameFrameworkSerializer", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Base\\GameFrameworkSerializer.cs"}, {"color": "#4ECDC4", "id": "ConfigManager", "label": "ConfigManager", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Config\\ConfigManager.cs"}, {"color": "#4ECDC4", "id": "DataNodeManager", "label": "DataNodeManager", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\DataNode\\DataNodeManager.cs"}, {"color": "#4ECDC4", "id": "DataNode", "label": "DataNode", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\DataNode\\DataNodeManager.DataNode.cs"}, {"color": "#4ECDC4", "id": "DataTableManager", "label": "DataTableManager", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\DataTable\\DataTableManager.cs"}, {"color": "#4ECDC4", "id": "Activator", "label": "Activator", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Base\\ReferencePool\\ReferencePool.ReferenceCollection.cs"}, {"color": "#4ECDC4", "id": "DataTable", "label": "DataTable", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\DataTable\\DataTableManager.DataTable.cs"}, {"color": "#4ECDC4", "id": "DownloadAgent", "label": "DownloadAgent", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Download\\DownloadManager.DownloadAgent.cs"}, {"color": "#4ECDC4", "id": "File", "label": "File", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Resource\\ResourceManager.VersionListProcessor.cs"}, {"color": "#4ECDC4", "id": "Path", "label": "Path", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Utility\\Utility.Path.cs"}, {"color": "#4ECDC4", "id": "Directory", "label": "Directory", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Utility\\Utility.Path.cs"}, {"color": "#4ECDC4", "id": "EntityManager", "label": "EntityManager", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Entity\\EntityManager.cs"}, {"color": "#4ECDC4", "id": "EntityGroup", "label": "EntityGroup", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Entity\\EntityManager.EntityGroup.cs"}, {"color": "#4ECDC4", "id": "FileSystem", "label": "FileSystem", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\FileSystem\\FileSystem.cs"}, {"color": "#4ECDC4", "id": "FileSystemManager", "label": "FileSystemManager", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\FileSystem\\FileSystemManager.cs"}, {"color": "#4ECDC4", "id": "Utility.Path", "label": "Utility.Path", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Resource\\ResourceManager.VersionListProcessor.cs"}, {"color": "#4ECDC4", "id": "Fsm", "label": "Fsm", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Fsm\\Fsm.cs"}, {"color": "#4ECDC4", "id": "FsmManager", "label": "FsmManager", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Fsm\\FsmManager.cs"}, {"color": "#4ECDC4", "id": "Fsm\u003cT\u003e", "label": "Fsm\u003cT\u003e", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Fsm\\FsmManager.cs"}, {"color": "#4ECDC4", "id": "LocalizationManager", "label": "LocalizationManager", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Localization\\LocalizationManager.cs"}, {"color": "#4ECDC4", "id": "NetworkManager", "label": "NetworkManager", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Network\\NetworkManager.cs"}, {"color": "#4ECDC4", "id": "NetworkChannelBase", "label": "NetworkChannelBase", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Network\\NetworkManager.NetworkChannelBase.cs"}, {"color": "#4ECDC4", "id": "ObjectPoolManager", "label": "ObjectPoolManager", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\ObjectPool\\ObjectPoolManager.cs"}, {"color": "#4ECDC4", "id": "Object", "label": "Object", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\ObjectPool\\ObjectPoolManager.Object.cs"}, {"color": "#4ECDC4", "id": "ObjectPool", "label": "ObjectPool", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\ObjectPool\\ObjectPoolManager.ObjectPool.cs"}, {"color": "#4ECDC4", "id": "Object\u003cT\u003e", "label": "Object\u003cT\u003e", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\ObjectPool\\ObjectPoolManager.ObjectPool.cs"}, {"color": "#4ECDC4", "id": "ResourceManager", "label": "ResourceManager", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Resource\\ResourceManager.cs"}, {"color": "#4ECDC4", "id": "Utility.Verifier", "label": "Utility.Verifier", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Resource\\ResourceManager.cs"}, {"color": "#4ECDC4", "id": "CheckInfo", "label": "CheckInfo", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Resource\\ResourceManager.ResourceChecker.CheckInfo.cs"}, {"color": "#4ECDC4", "id": "ResourceLoader", "label": "ResourceLoader", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Resource\\ResourceManager.ResourceLoader.cs"}, {"color": "#4ECDC4", "id": "LoadResourceAgent", "label": "LoadResourceAgent", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Resource\\ResourceManager.ResourceLoader.LoadResourceAgent.cs"}, {"color": "#4ECDC4", "id": "ResourceUpdater", "label": "ResourceUpdater", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Resource\\ResourceManager.ResourceUpdater.cs"}, {"color": "#4ECDC4", "id": "Array", "label": "Array", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Utility\\Utility.Verifier.cs"}, {"color": "#4ECDC4", "id": "VersionListProcessor", "label": "VersionListProcessor", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Resource\\ResourceManager.VersionListProcessor.cs"}, {"color": "#4ECDC4", "id": "SceneManager", "label": "SceneManager", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Scene\\SceneManager.cs"}, {"color": "#4ECDC4", "id": "SoundManager", "label": "SoundManager", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Sound\\SoundManager.cs"}, {"color": "#4ECDC4", "id": "UIManager", "label": "UIManager", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\UI\\UIManager.cs"}, {"color": "#4ECDC4", "id": "UIGroup", "label": "UIGroup", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\UI\\UIManager.UIGroup.cs"}, {"color": "#4ECDC4", "id": "Assembly", "label": "Assembly", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Utility\\Utility.Assembly.cs"}, {"color": "#4ECDC4", "id": "Text", "label": "Text", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Utility\\Utility.Json.cs"}, {"color": "#4ECDC4", "id": "Compression", "label": "Compression", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Utility\\Utility.Compression.cs"}, {"color": "#4ECDC4", "id": "Encryption", "label": "Encryption", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Utility\\Utility.Encryption.cs"}, {"color": "#4ECDC4", "id": "Json", "label": "Json", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Utility\\Utility.Json.cs"}, {"color": "#4ECDC4", "id": "Verifier", "label": "Verifier", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Utility\\Utility.Verifier.cs"}, {"color": "#4ECDC4", "id": "DataProvider", "label": "DataProvider", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Base\\DataProvider\\DataProvider.cs"}, {"color": "#4ECDC4", "id": "EventPool", "label": "EventPool", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Base\\EventPool\\EventPool.cs"}, {"color": "#4ECDC4", "id": "Event", "label": "Event", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Base\\EventPool\\EventPool.cs"}, {"color": "#4ECDC4", "id": "ReferenceCollection", "label": "ReferenceCollection", "shape": "dot", "title": "Type: call\nFile: G:\\AI\\GameFramework-master\\GameFramework\\Base\\ReferencePool\\ReferencePool.ReferenceCollection.cs"}]);
+                  edges = new vis.DataSet([{"color": "#4ECDC4", "from": "GameFrameworkEntry", "label": "call", "to": "Utility.Marshal"}, {"color": "#4ECDC4", "from": "GameFrameworkEntry", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "GameFrameworkEntry", "label": "call", "to": "Type"}, {"color": "#4ECDC4", "from": "GameFrameworkSerializer", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "ConfigManager", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "DataNodeManager", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "DataNode", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "DataTableManager", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "DataTableManager", "label": "call", "to": "Activator"}, {"color": "#4ECDC4", "from": "DataTable", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "DownloadAgent", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "DownloadAgent", "label": "call", "to": "File"}, {"color": "#4ECDC4", "from": "DownloadAgent", "label": "call", "to": "Path"}, {"color": "#4ECDC4", "from": "DownloadAgent", "label": "call", "to": "Directory"}, {"color": "#4ECDC4", "from": "Path", "label": "call", "to": "Directory"}, {"color": "#4ECDC4", "from": "EntityManager", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "EntityGroup", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "FileSystem", "label": "call", "to": "Utility.Marshal"}, {"color": "#4ECDC4", "from": "FileSystem", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "FileSystem", "label": "call", "to": "File"}, {"color": "#4ECDC4", "from": "FileSystem", "label": "call", "to": "Path"}, {"color": "#4ECDC4", "from": "FileSystem", "label": "call", "to": "Directory"}, {"color": "#4ECDC4", "from": "FileSystemManager", "label": "call", "to": "Utility.Path"}, {"color": "#4ECDC4", "from": "FileSystemManager", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "FileSystemManager", "label": "call", "to": "File"}, {"color": "#4ECDC4", "from": "Fsm", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "FsmManager", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "FsmManager", "label": "call", "to": "Fsm\u003cT\u003e"}, {"color": "#4ECDC4", "from": "LocalizationManager", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "NetworkManager", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "NetworkChannelBase", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "ObjectPoolManager", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "Object", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "ObjectPool", "label": "call", "to": "Object\u003cT\u003e"}, {"color": "#4ECDC4", "from": "ObjectPool", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "ResourceManager", "label": "call", "to": "File"}, {"color": "#4ECDC4", "from": "ResourceManager", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "ResourceManager", "label": "call", "to": "Utility.Verifier"}, {"color": "#4ECDC4", "from": "CheckInfo", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "ResourceLoader", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "ResourceLoader", "label": "call", "to": "Utility.Path"}, {"color": "#4ECDC4", "from": "LoadResourceAgent", "label": "call", "to": "Utility.Path"}, {"color": "#4ECDC4", "from": "LoadResourceAgent", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "ResourceUpdater", "label": "call", "to": "Array"}, {"color": "#4ECDC4", "from": "ResourceUpdater", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "VersionListProcessor", "label": "call", "to": "Utility.Path"}, {"color": "#4ECDC4", "from": "VersionListProcessor", "label": "call", "to": "File"}, {"color": "#4ECDC4", "from": "VersionListProcessor", "label": "call", "to": "Path"}, {"color": "#4ECDC4", "from": "VersionListProcessor", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "SceneManager", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "SoundManager", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "UIManager", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "UIGroup", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "Assembly", "label": "call", "to": "Type"}, {"color": "#4ECDC4", "from": "Assembly", "label": "call", "to": "Text"}, {"color": "#4ECDC4", "from": "Compression", "label": "call", "to": "Text"}, {"color": "#4ECDC4", "from": "Encryption", "label": "call", "to": "Array"}, {"color": "#4ECDC4", "from": "Json", "label": "call", "to": "Text"}, {"color": "#4ECDC4", "from": "Verifier", "label": "call", "to": "Array"}, {"color": "#4ECDC4", "from": "DataProvider", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "EventPool", "label": "call", "to": "Utility.Text"}, {"color": "#4ECDC4", "from": "EventPool", "label": "call", "to": "Event"}, {"color": "#4ECDC4", "from": "ReferenceCollection", "label": "call", "to": "Activator"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "physics"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+                  // if this network requires displaying the configure window,
+                  // put it in its div
+                  options.configure["container"] = document.getElementById("config");
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,504 @@
+classDiagram
+    class LoadAssetCallbacks
+    LoadAssetCallbacks ..> LoadAssetUpdateCallback
+    LoadAssetCallbacks ..> LoadAssetDependencyAssetCallback
+    LoadAssetCallbacks ..> LoadAssetFailureCallback
+    LoadAssetCallbacks ..> LoadAssetSuccessCallback
+
+    class UnloadSceneCallbacks
+    UnloadSceneCallbacks ..> UnloadSceneFailureCallback
+    UnloadSceneCallbacks ..> UnloadSceneSuccessCallback
+
+    class LoadBytesCallbacks
+    LoadBytesCallbacks ..> LoadBytesSuccessCallback
+    LoadBytesCallbacks ..> LoadBytesFailureCallback
+
+    class EntityInfo
+    EntityInfo --|> IReference
+    EntityInfo ..> IEntity
+    EntityInfo ..> IEntity
+    EntityInfo ..> EntityStatus
+
+    class ShowEntityDependencyAssetEventArgs
+    ShowEntityDependencyAssetEventArgs --|> GameFrameworkEventArgs
+
+    class ResourceObject
+    ResourceObject --|> ObjectBase
+    ResourceObject ..> IResourceHelper
+    ResourceObject ..> ResourceLoader
+
+    class LoadBinaryCallbacks
+    LoadBinaryCallbacks ..> LoadBinarySuccessCallback
+    LoadBinaryCallbacks ..> LoadBinaryFailureCallback
+
+    class ResetSoundAgentEventArgs
+    ResetSoundAgentEventArgs --|> GameFrameworkEventArgs
+
+    class EntityInstanceObject
+    EntityInstanceObject --|> ObjectBase
+    EntityInstanceObject ..> IEntityHelper
+
+    class LoadResourceAgentHelperErrorEventArgs
+    LoadResourceAgentHelperErrorEventArgs --|> GameFrameworkEventArgs
+    LoadResourceAgentHelperErrorEventArgs ..> LoadResourceStatus
+
+    class ReferenceCollection
+    ReferenceCollection ..> IReference
+
+    class LoadAssetTask
+    LoadAssetTask --|> LoadResourceTaskBase
+    LoadAssetTask ..> LoadAssetCallbacks
+
+    class ResourceApplyFailureEventArgs
+    ResourceApplyFailureEventArgs --|> GameFrameworkEventArgs
+
+    class ResourceVerifyFailureEventArgs
+    ResourceVerifyFailureEventArgs --|> GameFrameworkEventArgs
+
+    class DownloadAgentHelperErrorEventArgs
+    DownloadAgentHelperErrorEventArgs --|> GameFrameworkEventArgs
+
+    class EntityManager
+    EntityManager --|> GameFrameworkModule
+    EntityManager --|> IEntityManager
+
+    class NetworkManager
+    NetworkManager --|> GameFrameworkModule
+    NetworkManager --|> INetworkManager
+
+    class FileSystem
+    FileSystem --|> IFileSystem
+
+    class ShowEntityInfo
+    ShowEntityInfo --|> IReference
+    ShowEntityInfo ..> EntityGroup
+
+    class DataNode
+    DataNode --|> IDataNode
+    DataNode --|> IReference
+
+    class ResourceApplySuccessEventArgs
+    ResourceApplySuccessEventArgs --|> GameFrameworkEventArgs
+
+    class NetworkClosedEventArgs
+    NetworkClosedEventArgs --|> GameFrameworkEventArgs
+    NetworkClosedEventArgs ..> INetworkChannel
+
+    class LoadResourceAgentHelperParseBytesCompleteEventArgs
+    LoadResourceAgentHelperParseBytesCompleteEventArgs --|> GameFrameworkEventArgs
+
+    class NetworkErrorEventArgs
+    NetworkErrorEventArgs --|> GameFrameworkEventArgs
+    NetworkErrorEventArgs ..> SocketError
+    NetworkErrorEventArgs ..> NetworkErrorCode
+    NetworkErrorEventArgs ..> INetworkChannel
+
+    class ResourceUpdateFailureEventArgs
+    ResourceUpdateFailureEventArgs --|> GameFrameworkEventArgs
+
+    class DataNodeManager
+    DataNodeManager --|> GameFrameworkModule
+    DataNodeManager --|> IDataNodeManager
+
+    class Text
+    Text ..> ITextHelper
+
+    class LoadResourceAgentHelperReadBytesCompleteEventArgs
+    LoadResourceAgentHelperReadBytesCompleteEventArgs --|> GameFrameworkEventArgs
+
+    class AssetInfo
+    AssetInfo ..> ResourceName
+
+    class UnloadSceneFailureEventArgs
+    UnloadSceneFailureEventArgs --|> GameFrameworkEventArgs
+
+    class NetworkCustomErrorEventArgs
+    NetworkCustomErrorEventArgs --|> GameFrameworkEventArgs
+    NetworkCustomErrorEventArgs ..> INetworkChannel
+
+    class ReferencePool
+    ReferencePool ..> ReferenceCollection
+    ReferencePool ..> IReference
+
+    class DebuggerManager
+    DebuggerManager --|> GameFrameworkModule
+    DebuggerManager --|> IDebuggerManager
+
+    class ResourceUpdateAllCompleteEventArgs
+    ResourceUpdateAllCompleteEventArgs --|> GameFrameworkEventArgs
+
+    class GameFrameworkEntry
+    GameFrameworkEntry ..> GameFrameworkModule
+    GameFrameworkEntry ..> GameFrameworkLinkedList
+
+    class SoundManager
+    SoundManager --|> GameFrameworkModule
+    SoundManager --|> ISoundManager
+
+    class ResourceManager
+    ResourceManager --|> GameFrameworkModule
+    ResourceManager --|> IResourceManager
+
+    class WebRequestAgentHelperErrorEventArgs
+    WebRequestAgentHelperErrorEventArgs --|> GameFrameworkEventArgs
+
+    class LoadResourceAgentHelperUpdateEventArgs
+    LoadResourceAgentHelperUpdateEventArgs --|> GameFrameworkEventArgs
+    LoadResourceAgentHelperUpdateEventArgs ..> LoadResourceProgress
+
+    class LoadDependencyAssetTask
+    LoadDependencyAssetTask --|> LoadResourceTaskBase
+
+    class LoadSceneDependencyAssetEventArgs
+    LoadSceneDependencyAssetEventArgs --|> GameFrameworkEventArgs
+
+    class FileSystemManager
+    FileSystemManager --|> GameFrameworkModule
+    FileSystemManager --|> IFileSystemManager
+
+    class Version
+    Version ..> IVersionHelper
+
+    class DownloadCounterNode
+    DownloadCounterNode --|> IReference
+
+    class LoadResourceAgentHelperReadFileCompleteEventArgs
+    LoadResourceAgentHelperReadFileCompleteEventArgs --|> GameFrameworkEventArgs
+
+    class ResourceVerifyStartEventArgs
+    ResourceVerifyStartEventArgs --|> GameFrameworkEventArgs
+
+    class DownloadAgentHelperUpdateLengthEventArgs
+    DownloadAgentHelperUpdateLengthEventArgs --|> GameFrameworkEventArgs
+
+    class NetworkMissHeartBeatEventArgs
+    NetworkMissHeartBeatEventArgs --|> GameFrameworkEventArgs
+    NetworkMissHeartBeatEventArgs ..> INetworkChannel
+
+    class HideEntityCompleteEventArgs
+    HideEntityCompleteEventArgs --|> GameFrameworkEventArgs
+    HideEntityCompleteEventArgs ..> IEntityGroup
+
+    class UnloadSceneSuccessEventArgs
+    UnloadSceneSuccessEventArgs --|> GameFrameworkEventArgs
+
+    class UpdateVersionListCallbacks
+    UpdateVersionListCallbacks ..> UpdateVersionListFailureCallback
+    UpdateVersionListCallbacks ..> UpdateVersionListSuccessCallback
+
+    class ConfigManager
+    ConfigManager --|> GameFrameworkModule
+    ConfigManager --|> IConfigManager
+
+    class ObjectPoolManager
+    ObjectPoolManager --|> GameFrameworkModule
+    ObjectPoolManager --|> IObjectPoolManager
+
+    class Event
+    Event --|> IReference
+
+    class ObjectBase
+    ObjectBase --|> IReference
+
+    class Variable
+    Variable --|> IReference
+
+    class NetworkConnectedEventArgs
+    NetworkConnectedEventArgs --|> GameFrameworkEventArgs
+    NetworkConnectedEventArgs ..> INetworkChannel
+
+    class ReadDataFailureEventArgs
+    ReadDataFailureEventArgs --|> GameFrameworkEventArgs
+
+    class ShowEntityFailureEventArgs
+    ShowEntityFailureEventArgs --|> GameFrameworkEventArgs
+
+    class LoadResourceAgentHelperLoadCompleteEventArgs
+    LoadResourceAgentHelperLoadCompleteEventArgs --|> GameFrameworkEventArgs
+
+    class DownloadAgentHelperCompleteEventArgs
+    DownloadAgentHelperCompleteEventArgs --|> GameFrameworkEventArgs
+
+    class AssetObject
+    AssetObject --|> ObjectBase
+    AssetObject ..> IResourceHelper
+    AssetObject ..> ResourceLoader
+
+    class ResourceUpdateChangedEventArgs
+    ResourceUpdateChangedEventArgs --|> GameFrameworkEventArgs
+
+    class DownloadManager
+    DownloadManager --|> GameFrameworkModule
+    DownloadManager --|> IDownloadManager
+
+    class LoadBinaryInfo
+    LoadBinaryInfo --|> IReference
+    LoadBinaryInfo ..> ResourceInfo
+    LoadBinaryInfo ..> LoadBinaryCallbacks
+
+    class ShowEntitySuccessEventArgs
+    ShowEntitySuccessEventArgs --|> GameFrameworkEventArgs
+    ShowEntitySuccessEventArgs ..> IEntity
+
+    class TaskBase
+    TaskBase --|> IReference
+
+    class ResourceApplyStartEventArgs
+    ResourceApplyStartEventArgs --|> GameFrameworkEventArgs
+
+    class ResourceUpdateSuccessEventArgs
+    ResourceUpdateSuccessEventArgs --|> GameFrameworkEventArgs
+
+    class DataTableManager
+    DataTableManager --|> GameFrameworkModule
+    DataTableManager --|> IDataTableManager
+
+    class DataNodeManager
+    DataNodeManager ..> IDataNode
+    DataNodeManager ..> DataNode
+
+    class PackageVersionListSerializer
+
+    class ObjectPoolBase
+    ObjectPoolBase ..> ObjectInfo
+
+    class TcpNetworkChannel
+    TcpNetworkChannel --|> NetworkChannelBase
+
+    class WebRequestManager
+    WebRequestManager --|> GameFrameworkModule
+    WebRequestManager --|> IWebRequestManager
+
+    class WebRequestAgentHelperCompleteEventArgs
+    WebRequestAgentHelperCompleteEventArgs --|> GameFrameworkEventArgs
+
+    class DownloadAgentHelperUpdateBytesEventArgs
+    DownloadAgentHelperUpdateBytesEventArgs --|> GameFrameworkEventArgs
+
+    class GameFrameworkEventArgs
+    GameFrameworkEventArgs --|> EventArgs
+    GameFrameworkEventArgs --|> IReference
+
+    class EntityGroup
+    EntityGroup --|> IEntityGroup
+    EntityGroup ..> IEntity
+    EntityGroup ..> GameFrameworkLinkedList
+
+    class WebRequestFailureEventArgs
+    WebRequestFailureEventArgs --|> GameFrameworkEventArgs
+
+    class UIGroup
+    UIGroup --|> IUIGroup
+
+    class ResourceUpdateStartEventArgs
+    ResourceUpdateStartEventArgs --|> GameFrameworkEventArgs
+
+    class Object
+    Object --|> IReference
+
+    class ResourceIniter
+    ResourceIniter ..> ResourceName
+    ResourceIniter ..> GameFrameworkAction
+    ResourceIniter ..> ResourceManager
+
+    class PlaySoundInfo
+    PlaySoundInfo --|> IReference
+    PlaySoundInfo ..> PlaySoundParams
+    PlaySoundInfo ..> SoundGroup
+
+    class ResourceInfo
+    ResourceInfo ..> ResourceName
+    ResourceInfo ..> LoadType
+
+    class Packet
+    Packet --|> BaseEventArgs
+
+    class WebRequestSuccessEventArgs
+    WebRequestSuccessEventArgs --|> GameFrameworkEventArgs
+
+    class UIFormInfo
+    UIFormInfo --|> IReference
+    UIFormInfo ..> IUIForm
+
+    class GameFrameworkLinkedList
+    GameFrameworkLinkedList --|> ICollection
+    GameFrameworkLinkedList --|> IEnumerable
+
+    class UIManager
+    UIManager --|> GameFrameworkModule
+    UIManager --|> IUIManager
+
+    class SoundGroup
+    SoundGroup --|> ISoundGroup
+    SoundGroup ..> ISoundAgent
+
+    class DataTableBase
+    DataTableBase ..> DataProvider
+
+    class FsmManager
+    FsmManager --|> GameFrameworkModule
+    FsmManager --|> IFsmManager
+
+    class ReadDataUpdateEventArgs
+    ReadDataUpdateEventArgs --|> GameFrameworkEventArgs
+
+    class ProcedureBase
+
+    class LoadResourceTaskBase
+    LoadResourceTaskBase --|> TaskBase
+    LoadResourceTaskBase ..> ResourceInfo
+
+    class GameFrameworkException
+    GameFrameworkException --|> Exception
+
+    class DownloadFailureEventArgs
+    DownloadFailureEventArgs --|> GameFrameworkEventArgs
+
+    class PlaySoundDependencyAssetEventArgs
+    PlaySoundDependencyAssetEventArgs --|> GameFrameworkEventArgs
+    PlaySoundDependencyAssetEventArgs ..> PlaySoundParams
+
+    class OpenUIFormInfo
+    OpenUIFormInfo --|> IReference
+    OpenUIFormInfo ..> UIGroup
+
+    class GameFrameworkMultiDictionary
+    GameFrameworkMultiDictionary --|> IEnumerable
+
+    class VersionListProcessor
+    VersionListProcessor ..> GameFrameworkAction
+    VersionListProcessor ..> CheckVersionListResult
+    VersionListProcessor ..> IDownloadManager
+    VersionListProcessor ..> ResourceManager
+
+    class FsmBase
+
+    class ShowEntityUpdateEventArgs
+    ShowEntityUpdateEventArgs --|> GameFrameworkEventArgs
+
+    class GameFrameworkLog
+    GameFrameworkLog ..> ILogHelper
+
+    class NetworkManager
+    NetworkManager ..> INetworkChannel
+
+    class WebRequestAgent
+    WebRequestAgent ..> GameFrameworkAction
+    WebRequestAgent ..> IWebRequestAgentHelper
+
+    class BaseEventArgs
+    BaseEventArgs --|> GameFrameworkEventArgs
+
+    class EventManager
+    EventManager --|> GameFrameworkModule
+    EventManager --|> IEventManager
+
+    class Json
+
+    class GameEventArgs
+    GameEventArgs --|> BaseEventArgs
+
+    class DownloadTask
+    DownloadTask --|> TaskBase
+
+    class Verifier
+    Verifier ..> byte
+
+    class PlaySoundSuccessEventArgs
+    PlaySoundSuccessEventArgs --|> GameFrameworkEventArgs
+    PlaySoundSuccessEventArgs ..> ISoundAgent
+
+    class GameFrameworkSerializer
+    GameFrameworkSerializer ..> TryGetValueCallback
+    GameFrameworkSerializer ..> DeserializeCallback
+    GameFrameworkSerializer ..> SerializeCallback
+
+    class ConnectState
+
+    class WebRequestStartEventArgs
+    WebRequestStartEventArgs --|> GameFrameworkEventArgs
+
+    class ReceiveState
+    ReceiveState --|> IDisposable
+
+    class ResourcePackVersionListSerializer
+
+    class DownloadUpdateEventArgs
+    DownloadUpdateEventArgs --|> GameFrameworkEventArgs
+
+    class SendState
+    SendState --|> IDisposable
+
+    class LoadSceneFailureEventArgs
+    LoadSceneFailureEventArgs --|> GameFrameworkEventArgs
+
+    class LoadResourceAgent
+    LoadResourceAgent ..> ResourceLoader
+    LoadResourceAgent ..> LoadResourceTaskBase
+
+    class ResourceGroupCollection
+    ResourceGroupCollection --|> IResourceGroupCollection
+
+    class PlaySoundParams
+    PlaySoundParams --|> IReference
+
+    class CloseUIFormCompleteEventArgs
+    CloseUIFormCompleteEventArgs --|> GameFrameworkEventArgs
+    CloseUIFormCompleteEventArgs ..> IUIGroup
+
+    class TaskPool
+    TaskPool ..> TaskInfo
+
+    class FileSystem
+    FileSystem ..> FileSystemStream
+
+    class Compression
+    Compression ..> ICompressionHelper
+
+    class OpenUIFormUpdateEventArgs
+    OpenUIFormUpdateEventArgs --|> GameFrameworkEventArgs
+
+    class DebuggerManager
+    DebuggerManager ..> IDebuggerWindowGroup
+
+    class Json
+    Json ..> IJsonHelper
+
+    class FileSystemStream
+
+    class DataTable
+    DataTable --|> DataTableBase
+
+    class NetworkChannelBase
+    NetworkChannelBase --|> INetworkChannel
+    NetworkChannelBase --|> IDisposable
+
+    class UIManager
+    UIManager ..> IUIForm
+
+    class DownloadManager
+    DownloadManager ..> TaskPool
+
+    class ResourceUpdater
+    ResourceUpdater ..> IDownloadManager
+    ResourceUpdater ..> ResourceManager
+
+    class DownloadAgent
+    DownloadAgent --|> IDisposable
+
+    class SceneManager
+    SceneManager --|> GameFrameworkModule
+    SceneManager --|> ISceneManager
+
+    class DataTableManager
+    DataTableManager ..> IDataProviderHelper
+
+    class ResourceLoader
+    ResourceLoader ..> LoadBytesCallbacks
+    ResourceLoader ..> TaskPool
+
+    class DataProvider
+    DataProvider ..> LoadAssetCallbacks
+
+    class DebuggerWindowGroup
+    DebuggerWindowGroup --|> IDebuggerWindowGroup
