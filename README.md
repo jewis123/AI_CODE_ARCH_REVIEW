@@ -89,14 +89,14 @@ python main.py
 1. 需要配置正确的API密钥才能使用
 2. 大型代码库分析可能需要较长时间
 3. 代码分析Agent是逐代码文件分析，耗时与token消耗和代码量成正比
-4. 实现方案经供参考，主要关节已打通。
+4. 实现方案经供参考，主要关键点已打通。
 
 
 ## 许可证
 
 Apache License 2.0
 
-Copyright (c) 2024 [奥格]
+Copyright (c) 2024 [奥格](https://github.com/jewis123)
 
 根据 Apache License 2.0 许可证的要求，在使用本项目时需要：
 
