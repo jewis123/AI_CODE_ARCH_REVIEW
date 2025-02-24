@@ -1,11 +1,20 @@
-from models_util import get_dpv3_LLM, get_dpr1_LLM ,get_dqr1_7b_LLM,get_dpv3_LLM
+import os
+import sys
+
+
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
+
+from utils import get_dpv3_LLM, get_dpr1_LLM ,get_dqr1_7b_LLM,get_dpv3_LLM
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
+from langchain_ollama import ChatOllama
 
 import time
 import tiktoken
 import re
-from langchain_ollama import ChatOllama
 
 
 encoding = tiktoken.get_encoding("cl100k_base")
@@ -19,44 +28,44 @@ def remove_think_tags(text):
     return cleaned_text
 print("------------------加载本地模型 OVer--------------------------------")
 
-llm = get_dpv3_LLM()
-chain = PromptTemplate.from_template(prompt) | llm | StrOutputParser()
-start_time = time.time()
-result = chain.invoke({})
-token_count = len(encoding.encode(result))
-end_time = time.time()
-print(result)
-usedTime1 = end_time - start_time
-speed = token_count / usedTime1
-print(f"api-v3 耗时：{usedTime1} s,有效tokens: {token_count}, 生成速度：{speed} tokens/s")
+# llm = get_dpv3_LLM()
+# chain = PromptTemplate.from_template(prompt) | llm | StrOutputParser()
+# start_time = time.time()
+# result = chain.invoke({})
+# token_count = len(encoding.encode(result))
+# end_time = time.time()
+# print(result)
+# usedTime1 = end_time - start_time
+# speed = token_count / usedTime1
+# print(f"api-v3 耗时：{usedTime1} s,有效tokens: {token_count}, 生成速度：{speed} tokens/s")
 
-print("--------------------------------------------------")
+# print("--------------------------------------------------")
 
 
-llm = get_dqr1_7b_LLM()
-chain = PromptTemplate.from_template(prompt) | llm | StrOutputParser()
-start_time = time.time()
-result = chain.invoke({})
-end_time = time.time()
-token_count = len(encoding.encode(result))
-print(result)
-usedTime1 = end_time - start_time
-speed = token_count / usedTime1
-print(f"api-7b 耗时：{usedTime1} s,有效tokens: {token_count}, 生成速度：{speed} tokens/s")
+# llm = get_dqr1_7b_LLM()
+# chain = PromptTemplate.from_template(prompt) | llm | StrOutputParser()
+# start_time = time.time()
+# result = chain.invoke({})
+# end_time = time.time()
+# token_count = len(encoding.encode(result))
+# print(result)
+# usedTime1 = end_time - start_time
+# speed = token_count / usedTime1
+# print(f"api-7b 耗时：{usedTime1} s,有效tokens: {token_count}, 生成速度：{speed} tokens/s")
 
-print("--------------------------------------------------")
-llm = get_dpr1_LLM()
-chain = PromptTemplate.from_template(prompt) | llm | StrOutputParser()
-start_time = time.time()
-result = chain.invoke({})
-end_time = time.time()
-token_count = len(encoding.encode(result))
-print(result)
-usedTime1 = end_time - start_time
-speed = token_count / usedTime1
-print(f"api-max 耗时：{usedTime1} s,有效tokens: {token_count}, 生成速度：{speed} tokens/s")
+# print("--------------------------------------------------")
+# llm = get_dpr1_LLM()
+# chain = PromptTemplate.from_template(prompt) | llm | StrOutputParser()
+# start_time = time.time()
+# result = chain.invoke({})
+# end_time = time.time()
+# token_count = len(encoding.encode(result))
+# print(result)
+# usedTime1 = end_time - start_time
+# speed = token_count / usedTime1
+# print(f"api-max 耗时：{usedTime1} s,有效tokens: {token_count}, 生成速度：{speed} tokens/s")
 
-print("--------------------------------------------------")
+# print("--------------------------------------------------")
 
 chain = PromptTemplate.from_template(prompt) | local_llm | StrOutputParser()
 start_time = time.time()

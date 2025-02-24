@@ -6,7 +6,7 @@ import diskcache as dc
 global_cache = dc.Cache('.global_ast_cache')
 
 
-class CodeAnalyzer:
+class CodeParser:
     def __init__(self, repo_path: str):
         if not os.path.exists(repo_path) or repo_path == "":
             raise FileNotFoundError(f"目录不存在: {repo_path}")
@@ -29,7 +29,7 @@ class CodeAnalyzer:
     def parse_file(self, file_path: str, content:str, language:str) -> List[Tuple]:
         """解析单个文件并缓存结果"""
         from tree_sitter import Tree, Parser
-        from extracts.extract_factory import extract_factory
+        from .extracts.extract_factory import extract_factory
         
         lang = self.detect_language(file_path)
         

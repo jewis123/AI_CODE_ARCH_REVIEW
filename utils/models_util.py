@@ -1,6 +1,7 @@
 import os
 from langchain_openai import ChatOpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_ollama import ChatOllama
 
 def get_dpr1_LLM():
     return ChatOpenAI(
@@ -28,3 +29,6 @@ def get_gemini_LLM():
         model = os.environ.get("GEMINI_MODEL"),
         api_key = os.environ.get("GEMINI_API_KEY")
     )
+    
+def get_local_dp_LLM():
+    return ChatOllama(ChatOllama(model="deepseek-r1:14b"))

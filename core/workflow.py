@@ -1,7 +1,6 @@
 import os
-from code_analyzer import CodeAnalyzer
-from graphbuilder import GraphBuilder
-from vector_store import VectorStore
+from pre_action import CodeParser,GraphBuilder
+from core import VectorStore
 
 from typing import List, Tuple,Annotated, TypedDict
 import operator
@@ -57,7 +56,7 @@ def parallel_parse(state: CodeAnalysisState) -> CodeAnalysisState:
     repo_path = state.get("repo_path", "")
     filemap  = state.get("file_map", [])
     language = state.get("language")
-    analyzer = CodeAnalyzer(repo_path)
+    analyzer = CodeParser(repo_path)
     
     results = []
 
@@ -138,7 +137,7 @@ def build_relations(state: CodeAnalysisState) -> CodeAnalysisState:
 def generate_mermaid(state: CodeAnalysisState) -> CodeAnalysisState:
     """生成文档和可视化"""
     print("📝 生成代码架构分析文档...")
-    from agents.mermaid_generator import mermaid_generator,save_mermaid_file
+    from agents import mermaid_generator,save_mermaid_file
     
     query = "搜索所有class_parent及class_dependencies不为None的类信息"  # 查询语句  
 
@@ -151,7 +150,7 @@ def generate_mermaid(state: CodeAnalysisState) -> CodeAnalysisState:
 
 def analyze_framework(state: CodeAnalysisState) -> CodeAnalysisState:
     print("🔍 分析框架结构...")
-    from agents.framework_analyzer import framework_analyzer
+    from agents import framework_analyzer
     rst = framework_analyzer()
     
     with open(os.getenv("FRAMEWORK_ANALYSIS_PATH"), "w", encoding="utf-8") as f:

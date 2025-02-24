@@ -2,3 +2,4 @@
 .global_ast_cache/
 .vscode/
 chroma/
+.env

@@ -2,7 +2,7 @@ import os
 import re
 import time
 from chromadb import Collection
-from models_util import get_dpv3_LLM
+from utils.models_util import get_dpv3_LLM
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
 from langchain_core.language_models.chat_models import BaseChatModel

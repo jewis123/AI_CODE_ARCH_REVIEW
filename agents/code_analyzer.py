@@ -4,17 +4,17 @@ from langchain_core.prompts import PromptTemplate
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationChain
 from langchain.prompts import PromptTemplate
-from models_util import get_dpv3_LLM
+from utils import get_dpv3_LLM, get_local_dp_LLM
 import time
 
-def code_analyzer(file_path, question):
+def code_analyzer(file_path, question, useLocal=False):
     
     loader = TextLoader(file_path, autodetect_encoding = True)
     docs = loader.load()
     splitter = RecursiveCharacterTextSplitter.from_language(language=Language.CSHARP, chunk_size=200, chunk_overlap=50)
     sliced = splitter.split_documents(docs)
     
-    llm = get_dpv3_LLM()
+    llm = get_dpv3_LLM() if useLocal else get_local_dp_LLM()
     # 创建记忆存储
     memory = ConversationBufferMemory()
     

@@ -94,12 +94,13 @@ def extract_class_info(node:Node) ->dict:
                         if return_type.type != 'predefined_type':
                             if return_type.type == 'identifier':
                                 return_type = return_type.text.decode('utf-8')
+                                add_dependency(class_info, return_type)
                             else:
                                 for cchild in return_type.children:
                                     if cchild.type == 'identifier':
                                         return_type = cchild.text.decode('utf-8')
+                                        add_dependency(class_info, return_type)
                                         break
-                            add_dependency(class_info, return_type)
                         class_info['class_methods'].add(method_name)
                         extract_method_calls(subchild, class_info)
                             
