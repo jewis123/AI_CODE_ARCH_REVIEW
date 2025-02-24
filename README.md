@@ -73,6 +73,7 @@ python main.py
 ├── docs/           # 分析结果文档
 ├── extracts/       # 代码提取工具
 ├── test/          # 测试用例
+├── core/          # 工作流、向量库
 ├── main.py        # 主入口
 └── requirements.txt
 ```
@@ -90,6 +91,7 @@ python main.py
 2. 大型代码库分析可能需要较长时间
 3. 代码分析Agent是逐代码文件分析，耗时与token消耗和代码量成正比
 4. 实现方案经供参考，主要关键点已打通。
+5. 目前只实现了Csharp的Ast信息提取。
 
 
 ## 许可证

@@ -9,3 +9,4 @@ networkx>=3.0
 tree-sitter>=0.24.0
 tree-sitter-c-sharp>=0.23.1
 chromadb>=0.6.3
+sentence-transformers>=3.4.1

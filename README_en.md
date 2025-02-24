@@ -75,6 +75,7 @@ python main.py
 ├── docs/           # Analysis result documents
 ├── extracts/       # Code extraction tools
 ├── test/          # Test cases
+├── core/          # workflow、vectorstore
 ├── main.py        # Main entry
 └── requirements.txt
 ```
@@ -92,6 +93,7 @@ python main.py
 2. Large codebases may require extended analysis time
 3. Code analysis agents process files sequentially, time and token consumption scale with code volume
 4. Implementation serves as reference, main components are functional
+5. Only implemented CSharp AST information Extraction, other languages may require modification.
 
 ## License
 
